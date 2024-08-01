@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Usuarios</title>
+    <link rel="stylesheet" href="{% static 'inicio/cssA/style2.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #90b2d3;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        table {
+            width: 80%;
+            max-width: 600px;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f7f7f7;
+        }
+        tr:hover {
+            background-color: #f0f0f0;
+        }
+        .btn-create, .btn-back {
+            margin: 10px;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .btn-create:hover, .btn-back:hover {
+            background-color: #0056b3;
+        }
+        .edit-link, .delete-btn {
+            color: #007bff;
+            text-decoration: none;
+            padding: 4px 6px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Usuarios</h1>
+    <a href="{% url 'user_create' %}" class="btn-create">Crear Usuario</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombres</th>
+                <th>Correo</th>
+                <th>Rol</th>
+                <th>Activo</th>
+                <th>Fecha de Registro</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.nombres }}</td>
+                    <td>{{ user.correo }}</td>
+                    <td>{% if user.is_admin %}Admin{% elif user.is_empresa %}Empresa{% else %}Usuario{% endif %}</td>
+                    <td>{{ user.is_active }}</td>
+                    <td>{{ user.date_joined|date:"d/m/Y" }}</td>
+                    <td>
+                        <a href="{% url 'user_update' user.pk %}" class="edit-link">Editar</a>
+                        <form action="{% url 'user_delete' user.pk %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-btn">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'admin_dashboard' %}" class="btn-back">Volver a la Interfaz de Admin</a>
+</body>
+</html>

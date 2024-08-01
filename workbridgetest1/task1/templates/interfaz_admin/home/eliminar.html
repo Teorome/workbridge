@@ -1,0 +1,43 @@
+{% load static %}
+{% include 'interfaz_admin/pie/headerA.html' %}
+
+<div class="ui container" style="margin-top: 40px; padding: 40px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); border-radius: 10px; background-color: #f9f9f9;">
+    <h1 class="ui header" style="font-family: 'Lato', sans-serif; color: #db2828;">Eliminar Proyecto</h1>
+    <p style="font-size: 1.2em; color: #333;">¿Estás seguro de que deseas eliminar el proyecto <strong>"{{ proyecto.nom_proyecto }}"</strong>?</p>
+    <form action="" method="POST" style="margin-top: 20px;">
+        {% csrf_token %}
+        <button class="ui red button" type="submit" style="margin-right: 10px;"><i class="trash icon"></i> Eliminar</button>
+        <a href="{% url 'indexA' %}" class="ui button"><i class="cancel icon"></i> Cancelar</a>
+    </form>
+</div>
+
+{% include 'interfaz_admin/pie/footerA.html' %}
+
+<style>
+    .ui.container {
+        font-family: 'Lato', sans-serif;
+    }
+    .ui.header {
+        font-size: 2.5em;
+    }
+    .ui.container p {
+        font-size: 1.2em;
+        color: #333;
+    }
+    .ui.button.red {
+        background-color: #ad3030;
+        color: #fff;
+    }
+    .ui.button.red:hover {
+        background-color: #a82222;
+    }
+    .ui.button {
+        background-color: #f9f9f9;
+        color: #333;
+        border: 1px solid #ccc;
+    }
+    .ui.button:hover {
+        background-color: #e0e0e0;
+    }
+    </style>
+    

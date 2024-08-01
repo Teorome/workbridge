@@ -1,0 +1,47 @@
+{% load static %}
+{% include 'interfaz_admin/pie/headerA.html' %}
+
+<div class="ui container" style="margin-top: 20px;">
+    <div class="ui stackable grid">
+        {% for proyecto in proyectos %}
+            <div class="four wide column">
+                <div class="ui card">
+                    <div class="image" style="height: 200px; overflow: hidden;">
+                        <img src="{{ proyecto.imagen.url }}" alt="{{ proyecto.nom_proyecto }}">
+                    </div>
+                    <div class="content">
+                        <a class="header">{{ proyecto.nom_proyecto }}</a>
+                        <div class="meta">
+                            <span class="date">Fecha: {{ proyecto.fecha }}</span>
+                        </div>
+                        <div class="description">
+                            {% if proyecto.descripcion|length > 150 %}
+                                {{ proyecto.descripcion|slice:":147" }}...
+                            {% else %}
+                                {{ proyecto.descripcion }}
+                            {% endif %}
+                        </div>
+                        <div class="extra content">
+                            <span>Teléfono: {{ proyecto.telefono }}</span>
+                            <br>
+                            <span>Categoría: {{ proyecto.categoria }}</span>
+                            <div style="margin-top: 10px;">
+                                <div class="ui action input">
+                                    <input type="text" name="comentario" placeholder="Insertar comentario..." readonly onclick="window.location.href='{% url 'comentariosA' proyecto.id_proyecto %}'">
+                                </div>
+                            </div>
+                            <br>
+                            <p style="color: gray; font-size: small;">Proyecto publicado por: {{ proyecto.nom_aprendiz }}</p>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a href="{% url 'actualizar' proyecto.id_proyecto %}"><i class="edit icon"></i></a>
+                        <a href="{% url 'borrar' proyecto.id_proyecto %}"><i class="trash icon"></i></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% include 'interfaz_admin/pie/footerA.html' %}

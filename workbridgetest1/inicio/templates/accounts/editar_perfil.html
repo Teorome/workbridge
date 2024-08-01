@@ -1,0 +1,156 @@
+{% block content %}
+<div class="container mt-4" style="background-color: #e9f2f9; min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+    <div class="card" style="width: 100%; max-width: 600px; box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); overflow: hidden;">
+        <h2 class="card-header text-center bg-primary text-white">Editar Perfil</h2>
+        <div class="card-body" style="padding: 30px;">
+            <form method="post" class="ui form" id="edit-profile-form">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    <div class="input-box">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {% if field.field.widget.input_type == 'date' %}
+                            <input type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" value="{{ field.value|default_if_none:'' }}" class="form-control datepicker">
+                        {% else %}
+                            {{ field }}
+                        {% endif %}
+                        {% if field.help_text %}
+                        <small style="color: grey;">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                        <small class="error-message" style="color: red;">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+                
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger mt-3">
+                    <ul class="list-unstyled">
+                        {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                
+                <button type="submit" class="btn btn-primary btn-block">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Estilos personalizados para la página */
+    body {
+        background-color: #e9f2f9; /* Fondo azul tranquilo para toda la página */
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .card {
+        margin-top: 20px; /* Espacio superior para separar del borde superior de la ventana */
+    }
+
+    .card-header {
+        border-bottom: 2px solid #007bff; /* Borde inferior azul del encabezado */
+    }
+
+    .card-body {
+        background-color: #ffffff; /* Fondo blanco dentro de la tarjeta */
+    }
+
+    .input-box {
+        margin-bottom: 20px;
+    }
+
+    .input-box label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .input-box textarea,
+    .input-box input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ced4da; /* Borde interno */
+        border-radius: 4px;
+        box-sizing: border-box;
+        resize: vertical; /* Permite redimensionar verticalmente el textarea */
+    }
+
+    .input-box small {
+        display: block;
+        margin-top: 5px;
+    }
+
+    .input-box small.error-message {
+        color: red;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+        padding: 12px 24px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .btn-block {
+        width: 100%; /* Asegura que el botón ocupe todo el ancho disponible */
+    }
+
+    .alert {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    /* Estilos para hacer el formulario responsive */
+    @media (max-width: 768px) {
+        .card-body {
+            padding: 20px;
+        }
+        .btn-primary {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .input-box input,
+        .input-box textarea {
+            font-size: 14px;
+        }
+        .btn-primary {
+            padding: 10px 15px;
+            font-size: 14px;
+        }
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"/>
+
+<script>
+    $(document).ready(function(){
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true
+        });
+    });
+</script>
+
+{% endblock %}

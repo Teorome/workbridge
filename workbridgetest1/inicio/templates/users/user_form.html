@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if form.instance.pk %}Editar{% else %}Crear{% endif %} Usuario</title>
+    <link rel="stylesheet" href="{% static 'inicio/cssA/style2.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('{% static 'inicio/img/pexels-cmonphotography-1809644.jpg' %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .container {
+            width: 90%;
+            max-width: 500px;
+            margin: auto;
+            overflow: hidden;
+        }
+        .form-container {
+            background: #ffffff;
+            padding: 20px;
+            margin-top: 5px;
+            box-shadow: 0px 0px 10px 0px #000;
+            border-radius: 7px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container form .input-box {
+            margin-bottom: 15px;
+        }
+        .form-container form .input-box label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-container form .input-box input, 
+        .form-container form .input-box select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #292727;
+            border-radius: 5px;
+        }
+        .form-container form button {
+            padding: 10px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .form-container form button:hover {
+            background: #555;
+        }
+        .form-container .back-link {
+            text-align: center;
+            display: block;
+            margin-top: 15px;
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .form-container .back-link:hover {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>{% if form.instance.pk %}Editar{% else %}Crear{% endif %} Usuario</h1>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="input-box">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small style="color: grey;">{{ field.help_text }}</small>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit">{% if form.instance.pk %}Actualizar{% else %}Crear{% endif %}</button>
+            </form>
+            <a href="{% url 'user_list' %}" class="back-link">Volver a la Lista</a>
+        </div>
+    </div>
+</body>
+</html>

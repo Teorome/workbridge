@@ -1,0 +1,156 @@
+{% load static %}
+{% include 'interfaz_empresa/pie/headerE.html' %}
+
+<div class="ui container" style="margin-top: 40px;">
+    <!-- Información del Proyecto -->
+    <div class="ui segment" style="padding: 30px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); border-radius: 10px; background-color: #f9f9f9;">
+        <div class="ui grid stackable">
+            <div class="six wide column">
+                <div style="position: relative; overflow: hidden; border-radius: 10px;">
+                    <div class="image-slider">
+                        <div><img src="{{ proyecto.imagen.url }}" alt="{{ proyecto.nom_proyecto }}" style="width: 100%; border-radius: 10px;"></div>
+                        {% if proyecto.imagen1 %}
+                            <div><img src="{{ proyecto.imagen1.url }}" alt="{{ proyecto.nom_proyecto }}" style="width: 100%; border-radius: 10px;"></div>
+                        {% endif %}
+                        {% if proyecto.imagen2 %}
+                            <div><img src="{{ proyecto.imagen2.url }}" alt="{{ proyecto.nom_proyecto }}" style="width: 100%; border-radius: 10px;"></div>
+                        {% endif %}
+                        {% if proyecto.imagen3 %}
+                            <div><img src="{{ proyecto.imagen3.url }}" alt="{{ proyecto.nom_proyecto }}" style="width: 100%; border-radius: 10px;"></div>
+                        {% endif %}
+                        {% if proyecto.imagen4 %}
+                            <div><img src="{{ proyecto.imagen4.url }}" alt="{{ proyecto.nom_proyecto }}" style="width: 100%; border-radius: 10px;"></div>
+                        {% endif %}
+                    </div>
+                    <button type="button" class="slick-prev"></button>
+                    <button type="button" class="slick-next"></button>
+                </div>
+            </div>
+            <div class="ten wide column">
+                <h2 class="ui header" style="font-family: 'Lato', sans-serif; color: #4183c4;">{{ proyecto.nom_proyecto }}</h2>
+                <div class="meta" style="margin-bottom: 15px;">
+                    <span class="date" style="font-weight: bold; font-size: 1.1em; color: #767676;"><i class="calendar alternate outline icon"></i> Fecha de publicación: {{ proyecto.fecha }}</span>
+                </div>
+                <div class="description" style="margin-bottom: 15px;">
+                    <p style="font-size: 1.1em;"><strong><i class="info circle icon"></i> Descripción:</strong> {{ proyecto.descripcion }}</p>
+                </div>
+                <div class="extra content" style="margin-bottom: 15px;">
+                    <p style="font-size: 1.1em;"><strong><i class="phone icon"></i> Teléfono:</strong> {{ proyecto.telefono }}</p>
+                    <p style="font-size: 1.1em;"><strong><i class="tags icon"></i> Categoría:</strong> {{ proyecto.categoria }}</p>
+                    <p style="font-size: 1.1em;"><strong><i class="clock icon"></i> Tiempo de Desarrollo:</strong> {{ proyecto.tiempo_desarrollo }} semanas</p>
+                    <p style="font-size: 1.1em;"><strong><i class="code icon"></i> Tecnologías Utilizadas:</strong> {{ proyecto.tecnologias }}</p>
+                    <p style="font-size: 1.1em;"><strong><i class="users icon"></i> Número de Colaboradores:</strong> {{ proyecto.colaboradores }}</p>
+                </div>
+                <div class="extra content" style="margin-bottom: 15px;">
+                    <p style="font-size: 1.1em; color: gray;"><strong><i class="user icon"></i> Proyecto publicado por:</strong> {{ proyecto.nom_aprendiz }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comentarios -->
+    <div class="ui segment" style="padding: 30px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); border-radius: 10px; background-color: #f9f9f9; margin-top: 40px;">
+        <div class="ui comments">
+            <h3 class="ui dividing header" style="font-family: 'Lato', sans-serif; color: #4183c4;">Comentarios</h3>
+            {% for comentario in comentarios %}
+                <div class="comment" style="margin-bottom: 20px; padding: 20px; border-radius: 10px; background-color: #ffffff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                    <div class="content">
+                        <a class="author" style="font-weight: bold; color: #4183c4;">{{ comentario.usuario.nombres }}</a>
+                        <div class="metadata" style="color: #767676;">
+                            <span class="date"><i class="clock outline icon"></i> {{ comentario.fecha }}</span>
+                        </div>
+                        <div class="text" style="margin-top: 10px;">
+                            {{ comentario.contenido }}
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="ui message" style="background-color: #f9f9f9; color: #767676; border-radius: 10px;">
+                    No hay comentarios aún. ¡Sé el primero en comentar!
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Formulario para añadir comentario -->
+        <div class="ui segment" style="margin-top: 20px; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);">
+            <h3 class="ui dividing header" style="font-family: 'Lato', sans-serif;">Añadir Comentario</h3>
+            <form class="ui reply form" method="POST" action="{% url 'comentariosE' proyecto.id_proyecto %}">
+                {% csrf_token %}
+                <div class="field">
+                    {{ form.as_p }}
+                </div>
+                <button class="ui blue labeled submit icon button" type="submit">
+                    <i class="icon edit"></i> Añadir Comentario
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% include 'interfaz_empresa/pie/footerE.html' %}
+
+<script>
+    $(document).ready(function() {
+        $('.image-slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 1,
+            adaptiveHeight: true,
+            prevArrow: $('.slick-prev'),
+            nextArrow: $('.slick-next')
+        });
+    });
+</script>
+
+<style>
+.ui.container {
+    font-family: 'Lato', sans-serif;
+}
+.ui.segment {
+    transition: all 0.3s ease-in-out;
+}
+.ui.segment:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+.ui.header {
+    font-size: 2.5em;
+}
+.ui.comments .comment {
+    transition: box-shadow 0.3s ease;
+}
+.ui.comments .comment:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.ui.reply.form .field {
+    font-size: 1.1em;
+}
+.slick-prev, .slick-next {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 1em;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slick-prev {
+    left: 10px;
+}
+.slick-next {
+    right: 10px;
+}
+.slick-prev:hover, .slick-next:hover {
+    background-color: #4183c4;
+}
+.slick-prev i, .slick-next i {
+    font-size: 1em;
+}
+</style>

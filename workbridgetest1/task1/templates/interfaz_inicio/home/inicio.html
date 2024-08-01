@@ -1,0 +1,107 @@
+{% load static %}
+{% include 'interfaz_inicio/pie/header.html' %}
+
+<!-- Sección de bienvenida -->
+<section class="ui container" style="margin-top: 40px; text-align: center;">
+    <div class="ui segment" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+        <h1 class="ui header" style="font-family: 'Exo 2', sans-serif;">Bienvenidos a Workbridge</h1>
+        <p>Una plataforma dedicada a conectar estudiantes del SENA con oportunidades reales en la industria a través de sus proyectos innovadores.</p>
+    </div>
+</section>
+
+<!-- Sección de información -->
+<section class="ui container" style="margin-top: 40px;">
+    <div class="ui stackable two column grid" style="display: flex; flex-wrap: wrap; ">
+        <div class="column" style="flex: 1;">
+            <div class="ui fluid card" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px; height: 100%; ">
+                <div class="image" style="border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden;">
+                    <img src="{% static 'inicio/img/tarde.jpg' %}" alt="Información" style="border-top-left-radius: 10px; border-top-right-radius: 10px; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+        <div class="column" style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+            <!-- Aquí está la card -->
+            <div class="ui segment" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px; height: 100%; ">
+                <h2 class="ui header" style="text-align: center; font-family: 'Exo 2', sans-serif;">Información</h2>
+                <div class="ui divider"></div>
+                <p style="text-align: justify;">Somos un grupo de dedicados aprendices en Análisis y Desarrollo de Software en el CTGI. Nuestro innovador proyecto consiste en la creación de un repositorio público, diseñado específicamente para el uso exclusivo de estudiantes del SENA. Este repositorio proporciona una plataforma donde los estudiantes pueden compartir sus proyectos, los cuales tienen el potencial de captar el interés de diversas empresas. A través de esta iniciativa, buscamos fomentar la generación de ingresos, aprovechando al máximo las oportunidades que estos proyectos ofrecen y contribuyendo al desarrollo profesional de los estudiantes.</p>
+                <br>
+                <i class="big circular desktop icon" style="margin-left: 222px;"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ui container" style="margin-top: 40px;">
+    <div class="ui stackable two column grid" style="display: flex; flex-wrap: wrap;">
+        <div class="column" style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+            <div class="ui segment" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px; height: 100%;">
+                <h2 class="ui header" style="text-align: center; font-family: 'Exo 2', sans-serif;">¿En busca de talento?</h2>
+                <div class="ui divider"></div>
+                <p style="text-align: justify;">Si eres un empresario y buscas proyectos con gran potencial y los recursos adecuados para satisfacer las necesidades de tu empresa, este es el lugar ideal para ti. Puedes explorar los proyectos disponibles registrandote y luego haciendo clic en la sección 'Proyectos Disponibles' en el encabezado y seleccionar un aprendiz cuyo proyecto te haya interesado para contactar con dicha persona a través de la caja de comentarios de determinado proyecto.</p>
+                <br>
+                <i class="big circular briefcase icon" style="margin-left: 222px;"></i>
+            </div>
+            
+        </div>
+        <div class="column" style="flex: 1;">
+            <div class="ui fluid card" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px; height: 100%;">
+                <div class="image" style="border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden;">
+                    <img src="{% static 'inicio/img/tasks.jpg' %}" alt="Información" style="border-top-left-radius: 10px; border-top-right-radius: 10px; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="ui container" style="margin-top: 40px;">
+    <h2 class="ui header" style="text-align: center; font-family: 'Exo 2', sans-serif; color: white;">Nuestros Servicios</h2>
+    <div class="ui stackable four column grid">
+        <div class="column">
+            <div class="ui segment" style="text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+                <i class="big circular users icon" style="color: #4183c4;"></i>
+                <h4 class="ui header">Conexión con Empresas</h4>
+                <p>Facilitamos la conexión entre estudiantes y empresas interesadas en sus proyectos.</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui segment" style="text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+                <i class="big circular code icon" style="color: #4183c4;"></i>
+                <h4 class="ui header">Repositorio de Proyectos</h4>
+                <p>Un espacio para que los estudiantes compartan y desarrollen sus proyectos.</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui segment" style="text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+                <i class="big circular graduation cap icon" style="color: #4183c4;"></i>
+                <h4 class="ui header">Oportunidades de Aprendizaje</h4>
+                <p>Accede a recursos y oportunidades para mejorar tus habilidades.</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui segment" style="text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+                <i class="big circular handshake icon" style="color: #4183c4;"></i>
+                <h4 class="ui header">Soporte y Asesoría</h4>
+                <p>Ofrecemos soporte y asesoría para que tus proyectos sean exitosos.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<br>
+ <h2 class="ui header" style="text-align:center; font-family: 'Exo 2', sans-serif; color: white;">Nos encontramos en...</h2>
+        
+<!-- Mapa -->
+<section class="ui container" style="margin-top: 40px;">
+    <div class="ui segment" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+        <iframe class="ui segment" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.708482721617!2d-75.57064208919394!3d6.301981925671088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e442f25d65e6b65%3A0x6d9884e2f233cb1a!2sSENA%20Pedregal%2C%20Tejelo%2C%20Medell%C3%ADn%2C%20Castilla%2C%20Medell%C3%ADn%2C%20Antioquia!5e0!3m2!1ses!2sco!4v1694207666774!5m2!1ses!2sco" width="100%" height="500" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <h4>Dirección: #104, Complejo Norte Carrera 68, Medellín, Antioquia</h4>
+    </div>
+    
+</section>
+
+
+
+{% include 'interfaz_inicio/pie/footer.html' %}

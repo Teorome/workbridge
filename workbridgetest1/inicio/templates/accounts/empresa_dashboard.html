@@ -1,0 +1,122 @@
+{% load static %}
+
+{% include 'interfaz_empresa/pie/headerE.html' %}
+
+{% block content %}
+<div class="ui container" style="margin-top: 40px;">
+    {% if profile %}
+    <div class="ui centered card" style="width: 100%; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <img src="{% static 'inicio/img/usericon.png' %}" alt="Imagen de perfil del administrador" style="border-radius: 50%; width: 150px; height: 150px; display: block; margin: auto; margin-bottom: 20px;">
+        <div class="content">
+            <h2 class="ui header" style="text-align: center; font-size: 2rem;">Perfil de Empresa</h2>
+            <div class="ui divider"></div>
+            <div class="ui stackable grid">
+                <div class="eight wide column">
+                    <div class="ui list">
+                        <div class="item">
+                            <i class="edit icon"></i>
+                            <div class="content" style="font-size: 1.2rem;">
+                                <strong>Nombre:</strong> {{ user.nombres }} 
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="user icon"></i>
+                            <div class="content" style="font-size: 1.2rem;">
+                                <strong>Cargo:</strong> {{ user.apellidos }}
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="mail icon"></i>
+                            <div class="content" style="font-size: 1.2rem;">
+                                <strong>Correo:</strong> {{ user.correo }}
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="phone icon"></i>
+                            <div class="content" style="font-size: 1.2rem;">
+                                <strong>Teléfono:</strong> {{ user.telefono }}
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="venus mars icon"></i>
+                            <div class="content" style="font-size: 1.2rem;">
+                                <strong>Género:</strong> {{ user.get_genero_display }}
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="home icon"></i>
+                            <div class="content" style="font-size: 1.2rem;">
+                                <strong>Dirección:</strong> {{ user.direccion }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="eight wide column">
+                    <div class="ui list">
+                        <div class="item">
+                            <i class="birthday cake icon"></i>
+                            <div class="content" style="font-size: 1.2rem;">
+                                <strong>Fecha de Nacimiento:</strong> {{ profile.fecha_de_nacimiento }}
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="address card icon"></i>
+                            <div class="content" style="font-size: 1.2rem;">
+                                <strong>Dirección de la Sede:</strong> {{ profile.direccion_sede }}
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="phone icon"></i>
+                            <div class="content" style="font-size: 1.2rem;">
+                                <strong>Teléfono de la Empresa:</strong> {{ profile.telefono_empresa }}
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="id card icon"></i>
+                            <div class="content" style="font-size: 1.2rem;">
+                                <strong>Número de Identificación Fiscal:</strong> {{ profile.numero_identificacion_fiscal }}
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="industry icon"></i>
+                            <div class="content" style="font-size: 1.2rem;">
+                                <strong>Tipo de Empresa:</strong> {{ profile.tipo_empresa }}
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="industry icon"></i>
+                            <div class="content" style="font-size: 1.2rem;">
+                                <strong>Sector de la Empresa:</strong> {{ profile.sector_empresa }}
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="users icon"></i>
+                            <div class="content" style="font-size: 1.2rem;">
+                                <strong>Número de Empleados:</strong> {{ profile.numero_empleados }}
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="info circle icon"></i>
+                            <div class="content" style="font-size: 1.2rem;">
+                                <strong>Descripción de la Empresa:</strong> {{ profile.descripcion_empresa }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{% url 'editar_perfil' %}" class="ui button primary">Editar Perfil</a>
+    </div>
+    {% else %}
+    <div class="ui message">
+        <div class="header">Perfil no encontrado</div>
+        <p>No se ha creado un perfil para esta cuenta. Haz clic en el botón de abajo para crearlo.</p>
+        <a href="{% url 'editar_perfil' %}" class="ui button primary">Crear Perfil</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% include 'interfaz_admin/pie/footerA.html' %}

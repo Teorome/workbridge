@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'inicio/css2/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'inicio/css2/slick-theme.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'inicio/css2/fonts.css' %}">
+    <style>
+        body {
+            font-family: 'Nunito', serif; 
+            font-weight: 400;
+            background: rgb(0,69,166);
+            background: -moz-radial-gradient(circle, rgba(0,69,166,1) 23%, rgba(0,181,144,1) 91%);
+            background: -webkit-radial-gradient(circle, rgba(0,69,166,1) 23%, rgba(0,181,144,1) 91%);
+            background: radial-gradient(circle, rgba(0,69,166,1) 23%, rgba(0,181,144,1) 91%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0045a6",endColorstr="#00b590",GradientType=1);
+        }
+    </style>
+</head>
+<body>
+  <div class="ui stackable menu">
+    <a class="item logo-item" href="#">
+        <img src="{% static 'Public/img/logoWorkbridge.png' %}" alt="WorkBridge Logo">
+    </a>
+    <a class="item" href="/indexA">Proyectos</a>
+    <a class="item" href="/creacion">Crear Proyecto</a>
+    <div class="ui simple dropdown item">
+        <span>Gestión de Usuarios</span>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+            <a class="item" href="{% url 'user_create' %}">Crear Usuario</a>
+            <a class="item" href="{% url 'user_list' %}">Listar Usuarios</a>
+        </div>
+    </div>
+    <div class="right menu">
+        <div class="ui simple dropdown item">
+            <i class="user icon"></i>
+            <div>
+                {% if request.session.rol_usuario %}
+                    <span class="text">{{ request.session.rol_usuario }}</span>
+                {% endif %}
+            </div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" href="/perfil">Revisar perfil</a>
+                <a class="item" href="/Usuarios/logout">Cerrar sesión</a>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+  <script>
+    $(document).ready(function(){
+        $('.ui.dropdown').dropdown();
+    });
+  </script>
+</body>
+</html>

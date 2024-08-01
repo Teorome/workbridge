@@ -1,0 +1,53 @@
+{% load static %}
+{% include 'interfaz_inicio/pie/header.html' %}
+
+<div class="ui container" style="margin-top: 40px;">
+    <div class="ui segment" style="padding: 30px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); border-radius: 10px; background-color: #f9f9f9;">
+        <div class="ui comments">
+            <h3 class="ui dividing header" style="font-family: 'Lato', sans-serif; color: #4183c4;">Comentarios en {{ proyecto.nom_proyecto }}</h3>
+            {% for comentario in comentarios %}
+                <div class="comment" style="margin-bottom: 20px; padding: 20px; border-radius: 10px; background-color: #ffffff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                    <div class="content">
+                        <a class="author" style="font-weight: bold; color: #4183c4;">{{ comentario.usuario.nombres }}</a>
+                        <div class="metadata" style="color: #767676;">
+                            <span class="date"><i class="clock outline icon"></i> {{ comentario.fecha }}</span>
+                        </div>
+                        <div class="text" style="margin-top: 10px;">
+                            {{ comentario.contenido }}
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="ui message" style="background-color: #f9f9f9; color: #767676; border-radius: 10px;">
+                    No hay comentarios aún. ¡Sé el primero en comentar!
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Formulario para añadir comentario -->
+        <div class="ui segment" style="margin-top: 20px; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);">
+            <h3 class="ui dividing header" style="font-family: 'Lato', sans-serif;">Añadir Comentario</h3>
+            <form class="ui reply form" method="POST" action="{% url 'comentariosU' proyecto.id_proyecto %}">
+                {% csrf_token %}
+                <div class="field">
+                    {{ form.as_p }}
+                </div>
+                <button class="ui blue labeled submit icon button" type="button" onclick="denegar()">
+                    <i class="icon edit"></i> Añadir Comentario
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function denegar() {
+        Swal.fire({
+            icon: "error",
+            title: "Denegado",
+            text: "Debes estar registrado para comentar",
+        });
+    }
+</script>
+
+{% include 'interfaz_inicio/pie/footer.html' %}

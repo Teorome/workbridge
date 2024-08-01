@@ -1,0 +1,56 @@
+{% load static %}
+{% include 'interfaz_admin/pie/headerA.html' %}
+
+<div class="ui container" style="margin-top: 20px;">
+    <!-- Información del Proyecto -->
+    <div class="ui segment" style="padding: 20px;">
+        <div class="image" style="text-align: center; margin-bottom: 20px;">
+            <img src="{{ proyecto.imagen.url }}" alt="{{ proyecto.nom_proyecto }}" style="max-width: 100%; height: auto;">
+        </div>
+        <div class="content">
+            <h2 class="ui header">Nombre del Proyecto: {{ proyecto.nom_proyecto }}</h2>
+            <div class="meta">
+                <span class="date"><strong>Fecha:</strong> {{ proyecto.fecha }}</span>
+            </div>
+            <div class="description">
+                <p><strong>Descripción:</strong> {{ proyecto.descripcion }}</p>
+            </div>
+            <div class="extra content">
+                <p><strong>Teléfono:</strong> {{ proyecto.telefono }}</p>
+                <p><strong>Categoría:</strong> {{ proyecto.categoria }}</p>
+            </div>
+            <div class="extra content">
+                <p style="color: gray; font-size: small;"><strong>Proyecto publicado por:</strong> {{ proyecto.nom_aprendiz }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comentarios -->
+    <div class="ui comments" style="margin-top: 20px;">
+        <h3 class="ui dividing header">Comentarios</h3>
+        {% for comentario in comentarios %}
+            <div class="comment">
+                <div class="content">
+                    <a class="author">{{ comentario.usuario.get_full_name }}</a>
+                    <div class="metadata">
+                        <span class="date">{{ comentario.fecha }}</span>
+                    </div>
+                    <div class="text">
+                        {{ comentario.contenido }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Formulario para añadir comentario -->
+    <form class="ui reply form" method="POST" action="{% url 'comentariosA' proyecto.id_proyecto %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="ui blue labeled submit icon button" type="submit">
+            <i class="icon edit"></i> Añadir Comentario
+        </button>
+    </form>
+</div>
+
+{% include 'interfaz_admin/pie/footerA.html' %}

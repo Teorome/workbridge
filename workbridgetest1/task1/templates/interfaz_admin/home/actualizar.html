@@ -1,0 +1,94 @@
+{% load static %}
+{% include 'interfaz_admin/pie/headerA.html' %}
+
+<div class="ui container">
+  <h1>Crear Proyecto</h1>
+  <form action="" class="ui form" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="field">
+      <label for="id_nom_proyecto">Nombre del Proyecto</label>
+      <input type="text" id="id_nom_proyecto" name="nom_proyecto" placeholder="Nombre del Proyecto" value="{{ form.nom_proyecto.value }}" required>
+    </div>
+    <div class="field">
+      <label for="id_nom_aprendiz">Nombre del Aprendiz</label>
+      <input type="text" id="id_nom_aprendiz" name="nom_aprendiz" placeholder="Nombre del Aprendiz" value="{{ form.nom_aprendiz.value }}" required>
+    </div>
+    <div class="field">
+      <label for="id_descripcion">Descripción</label>
+      <textarea id="id_descripcion" name="descripcion" placeholder="Descripción" required>{{ form.descripcion.value }}</textarea>
+    </div>
+    <div class="field">
+      <label for="id_fecha">Fecha</label>
+      <input type="date" id="id_fecha" name="fecha" value="{{ form.fecha.value }}" required>
+    </div>
+    <div class="field">
+      <label for="id_telefono">Teléfono</label>
+      <input type="tel" id="id_telefono" name="telefono" placeholder="Teléfono" value="{{ form.telefono.value }}" required>
+    </div>
+    <div class="field">
+      <label for="id_contacto">Correo</label>
+      <input type="email" id="id_contacto" name="contacto" placeholder="Correo" value="{{ form.contacto.value }}" required>
+    </div>
+    <div class="field">
+      <label for="id_categoria">Categoría</label>
+      <select id="id_categoria" name="categoria" required>
+        <option value="">Seleccione una categoría</option>
+        <option value="Desarrollo Web" {% if form.categoria.value == "Desarrollo Web" %}selected{% endif %}>Desarrollo Web</option>
+        <option value="Aplicación Móviles" {% if form.categoria.value == "Aplicación Móviles" %}selected{% endif %}>Aplicación Móviles</option>
+        <option value="Inteligencia Artificial y Machine Learning" {% if form.categoria.value == "Inteligencia Artificial y Machine Learning" %}selected{% endif %}>Inteligencia Artificial y Machine Learning</option>
+        <option value="Sistemas de Información y Bases de Datos" {% if form.categoria.value == "Sistemas de Información y Bases de Datos" %}selected{% endif %}>Sistemas de Información y Bases de Datos</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="id_tiempo_desarrollo">Tiempo de Desarrollo (en semanas)</label>
+      <input type="number" id="id_tiempo_desarrollo" name="tiempo_desarrollo" placeholder="Tiempo de Desarrollo" value="{{ form.tiempo_desarrollo.value }}" required>
+    </div>
+    <div class="field">
+      <label for="id_tecnologias">Tecnologías Utilizadas</label>
+      <input type="text" id="id_tecnologias" name="tecnologias" placeholder="Tecnologías Utilizadas" value="{{ form.tecnologias.value }}" required>
+    </div>
+    <div class="field">
+      <label for="id_colaboradores">Número de Colaboradores</label>
+      <input type="number" id="id_colaboradores" name="colaboradores" placeholder="Número de Colaboradores" value="{{ form.colaboradores.value }}" required>
+    </div>
+    <div class="field">
+      <label for="id_imagen">Imagen Principal</label>
+      <input type="file" id="id_imagen" name="imagen" accept="image/*">
+      {% if form.instance.imagen %}
+        <img src="{{ form.instance.imagen.url }}" alt="Imagen actual" style="max-width: 200px; margin-top: 10px;">
+      {% endif %}
+    </div>
+    <div class="field">
+      <label for="id_imagen1">Imagen Adicional 1</label>
+      <input type="file" id="id_imagen1" name="imagen1" accept="image/*">
+      {% if form.instance.imagen1 %}
+        <img src="{{ form.instance.imagen1.url }}" alt="Imagen adicional 1 actual" style="max-width: 200px; margin-top: 10px;">
+      {% endif %}
+    </div>
+    <div class="field">
+      <label for="id_imagen2">Imagen Adicional 2</label>
+      <input type="file" id="id_imagen2" name="imagen2" accept="image/*">
+      {% if form.instance.imagen2 %}
+        <img src="{{ form.instance.imagen2.url }}" alt="Imagen adicional 2 actual" style="max-width: 200px; margin-top: 10px;">
+      {% endif %}
+    </div>
+    <div class="field">
+      <label for="id_imagen3">Imagen Adicional 3</label>
+      <input type="file" id="id_imagen3" name="imagen3" accept="image/*">
+      {% if form.instance.imagen3 %}
+        <img src="{{ form.instance.imagen3.url }}" alt="Imagen adicional 3 actual" style="max-width: 200px; margin-top: 10px;">
+      {% endif %}
+    </div>
+    <div class="field">
+      <label for="id_imagen4">Imagen Adicional 4</label>
+      <input type="file" id="id_imagen4" name="imagen4" accept="image/*">
+      {% if form.instance.imagen4 %}
+        <img src="{{ form.instance.imagen4.url }}" alt="Imagen adicional 4 actual" style="max-width: 200px; margin-top: 10px;">
+      {% endif %}
+    </div>
+    <br>
+    <button class="ui button primary" type="submit">Enviar</button>
+  </form>
+</div>
+
+{% include 'interfaz_admin/pie/footerA.html' %}
